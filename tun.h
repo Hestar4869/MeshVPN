@@ -93,7 +93,12 @@ private:
 #if defined(__linux__) || defined(__unix__)
 // Linux环境
 class UnixTun : public Tun{
+    public:
+    WinTun(std::string name, std::string ip, uint8_t mask);
 
+    ~WinTun() override;
+
+    bool Start() override;
 };
 #endif
 

@@ -95,7 +95,6 @@ bool WinTun::Start() {
 
     // 创建适配器
     adapter_ = WintunCreateAdapter(wname, L"Wintun", nullptr);
-    BOOST_LOG_TRIVIAL(trace) << "Adapter created successfully";
 
     if (!adapter_) {
         auto LastError = GetLastError();
@@ -103,7 +102,7 @@ bool WinTun::Start() {
         // log
         return false;
     }
-
+    BOOST_LOG_TRIVIAL(trace) << "Adapter created successfully";
     // 设置子网以及自己ip
     MIB_UNICASTIPADDRESS_ROW AddressRow;
     InitializeUnicastIpAddressEntry(&AddressRow);
@@ -121,7 +120,7 @@ bool WinTun::Start() {
 
     session_ = WintunStartSession(adapter_, 0x400000);
     if (!session_) {
-        BOOST_LOG_TRIVIAL(error) << "Failed to create adapter, error code is " << LastError;
+        BOOST_LOG_TRIVIAL(error) << "Failed to create session, error code is " << LastError;
         return false;
     }
 

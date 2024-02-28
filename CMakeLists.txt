@@ -32,7 +32,11 @@ if (WIN32)
     target_link_libraries(tun PUBLIC Iphlpapi.lib ntdll.lib ws2_32.lib Boost::log)
 
     # 添加可执行文件
-    add_executable(${PROJECT_NAME} main.cpp)
+    add_executable(${PROJECT_NAME} main.cpp
+            core/service.cpp
+            core/service.h
+            core/config.cpp
+            core/config.h)
 
     # 根据不同架构选择不同的wintun.dll
     if (CMAKE_SIZEOF_VOID_P EQUAL 8) # 64-bit 架构
